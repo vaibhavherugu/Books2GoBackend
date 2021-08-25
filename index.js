@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
+const booksRoute = require("./routes/book");
 
 dotenv.config();
 
@@ -15,5 +16,6 @@ mongoose.connect(
 app.use(express.json());
 
 app.use("", authRoute);
+app.use("/books", booksRoute);
 
 app.listen(3000, () => console.log("Server Up and Running"));
