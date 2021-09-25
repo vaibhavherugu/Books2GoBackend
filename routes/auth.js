@@ -20,6 +20,8 @@ router.post("/register", async (req, res) => {
     lname: req.body.lname,
     email: req.body.email,
     password: hashedPassword,
+    address: req.body.address,
+    phone_number: req.body.phone_number,
   });
   try {
     const savedUser = await user.save();

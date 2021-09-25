@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const Book = require("../models/Books.js");
-const verify = require("./verifyToken");
+const Book = require("../model/Books.js");
+const Verify = require("./verifyToken");
 
-router.get("/", async (req, res) => {
+router.get("/booksFind", async (req, res) => {
   try {
     const books = await Book.find();
     res.json(books);
@@ -102,7 +102,7 @@ router.post("/", async (req, res) => {
     author: req.body.author,
     cover: req.body.cover,
     checkedOut: false,
-    lender: req.body.lender,
+    lenderEmail: req.body.lenderEmail,
   });
   try {
     const savedBook = await books.save();

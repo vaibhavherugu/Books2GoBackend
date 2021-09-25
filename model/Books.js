@@ -8,6 +8,7 @@ const BooksSchema = mongoose.Schema({
   author: {
     type: String,
     required: true,
+    default: "",
   },
   genre: {
     type: String,
@@ -15,17 +16,18 @@ const BooksSchema = mongoose.Schema({
   },
   cover: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
   checkedOut: {
     type: Boolean,
     required: true,
     default: false,
   },
-  lender: {
+  lenderEmail: {
     type: String,
     required: true,
-    default: false,
+    default: "",
   },
 });
 
