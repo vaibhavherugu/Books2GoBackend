@@ -7,7 +7,7 @@ const { registerValidation, loginValidation } = require("../validation");
 
 router.post("/register", async (req, res) => {
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(404).send(error.details[0].message);
 
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("This email is already in use.");
@@ -27,6 +27,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await user.save();
     res.send(savedUser._id);
   } catch (err) {
+    console.log(err);
     res.status(400).send(err);
   }
 });

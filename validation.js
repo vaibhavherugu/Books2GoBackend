@@ -5,7 +5,8 @@ const registerValidation = (data) => {
     lname: Joi.string().max(50).required(),
     email: Joi.string().max(50).required().email(),
     password: Joi.string().min(6).max(1024).required(),
-    lenderEmail: Joi.string().max(50).required(),
+    address: Joi.string().max(50).required(),
+    phone_number: Joi.string().max(50).required(),
   });
   return schema.validate(data);
 };

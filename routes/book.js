@@ -14,6 +14,7 @@ router.get("/booksFind", async (req, res) => {
 
 router.post("/search", async (req, res) => {
   const query = req.body.query;
+  const lenderE = req.body.lenderEmail;
   console.log(query);
 
   var result;
@@ -27,6 +28,7 @@ router.post("/search", async (req, res) => {
     result = await Book.find({
       title: { $regex: regex },
     });
+
     if (result !== undefined || null || NaN || "" || {} || []) {
       array = array.concat(result);
     }
@@ -37,8 +39,21 @@ router.post("/search", async (req, res) => {
       if (result1 !== undefined || null || NaN || "" || {} || []) {
         array = array.concat(result1);
       }
+      // if (result === undefined || null || NaN || "" || {} || []) {
+      //   result2 = await Book.find({
+      //     lenderEmail: { $regex: regex },
+      //   });
+      //   if (result2 !== undefined || null || NaN || "" || {} || []) {
+      //     array = array.concat(result1);
+      //   }
+      // }
     }
-
+    if (lenderE !== null) {
+      result = await Book.find({
+        lenderEmail: lenderE,
+      });
+      array = result;
+    }
     console.log(array);
     res.json({
       results: array,
@@ -110,6 +125,15 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.json({ message: err });
   }
+});
+
+router.get("/getEmail", async (req, res) => {
+  const id = req.body.id;
+
+  const email = await Book.find({
+    _id: id,
+  });
+  res.send(email);
 });
 
 module.exports = router;
