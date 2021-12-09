@@ -6,6 +6,10 @@ const authRoute = require("./routes/auth");
 const booksRoute = require("./routes/book");
 
 dotenv.config();
+app.use(express.json());
+
+app.use("", authRoute);
+app.use("/books", booksRoute);
 
 mongoose.connect(
   process.env.DB_CONNECT,
@@ -13,9 +17,4 @@ mongoose.connect(
   () => console.log("Connected to Database")
 );
 
-app.use(express.json());
-
-app.use("", authRoute);
-app.use("/books", booksRoute);
-
-app.listen(3000, () => console.log("Server Up and Running"));
+app.listen(3000);
