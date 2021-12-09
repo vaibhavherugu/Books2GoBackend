@@ -14,7 +14,7 @@ app.use("/books", booksRoute);
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("Connected to Books2Go Database!")
+  () => console.log("Connected to the Books2Go Database!")
 );
 
 app.listen(3000);
